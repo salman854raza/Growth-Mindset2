@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from io import BytesIO
 
-# Page configuration
+# Set page configuration
 st.set_page_config(page_title="Data Sweeper", layout='wide')
 
 # Custom CSS
@@ -34,7 +34,7 @@ if uploaded_files:
         if file_ext == ".csv":
             df = pd.read_csv(file)
         elif file_ext == ".xlsx":
-            df = pd.read_excel(file)
+            df = pd.read_excel(file, engine='openpyxl')  # Ensure openpyxl is used for .xlsx files
         else:
             st.error(f"Unsupported file type: {file_ext}")
             continue
@@ -91,4 +91,4 @@ if uploaded_files:
                 mime=mime_type
             )
 
-    st.success("🎉 All files processed successfully!")
+st.success("🎉 All files processed successfully!")
